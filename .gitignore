@@ -1,0 +1,35 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env
+.env
+.env.*
+
+# Build/exports temporales
+uploads/
+exports/
+
+# Salidas vCard locales
+*.vcf
+contactos.vcf
+
+# SO/editores
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Coverage/diagnóstico
+coverage/
+*.lcov
+
+# Locks (opcional mantener el lockfile). Descomenta si no quieres subirlo
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
