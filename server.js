@@ -64,7 +64,20 @@ function makeVCard(name, phone) {
 app.get('/api/files', (req, res) => {
   const entries = fs.readdirSync(UPLOADS_DIR)
     .filter(f => /\.(xlsx|xls|csv)$/i.test(f))
-    .map(f => ({ name: f, size: fs.statSync(path.join(UPLOADS_DIR, f)).size }));
+    .map(f => {
+      const full = path.join(UPLOADS_DIR, f);
+      let rowsCount = null;
+      try {
+        const wb = XLSX.readFile(full, { sheetStubs: true });
+        const sheetName = wb.SheetNames[0];
+        const ws = wb.Sheets[sheetName];
+        const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+        rowsCount = rows.length;
+      } catch (e) {
+        rowsCount = null;
+      }
+      return { name: f, size: fs.statSync(full).size, rows: rowsCount };
+    });
   res.json(entries);
 });
 

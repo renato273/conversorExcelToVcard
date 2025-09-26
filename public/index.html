@@ -15,7 +15,7 @@
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td>${f.name}</td>
-          <td>${(f.size/1024).toFixed(1)} KB</td>
+          <td>${((f.size/1048576) >= 1 ? (f.size/1048576).toFixed(1) : (f.size/1048576).toFixed(2))} mb ${f.rows!=null?`· ${f.rows} filas`:''}</td>
           <td>
             <div class="row">
               <label>Hoja (idx): <input type="number" value="0" min="0" class="sheet" /></label>
@@ -158,7 +158,7 @@
         <thead>
           <tr>
             <th>Archivo</th>
-            <th>Tamaño</th>
+            <th>Tamaño · Filas</th>
             <th>Parámetros</th>
             <th>Acciones</th>
           </tr>
